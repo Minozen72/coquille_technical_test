@@ -14,6 +14,7 @@
                 <tr>
                     <th scope="col">Prénom</th>
                     <th scope="col">Nom</th>
+                    <th scope="col">Société</th>
                     <th scope="col">Mail</th>
                     <th scope="col">Date d'inscription</th>
                 </tr>
@@ -23,6 +24,7 @@
                     <tr>
                         <td>{{ customer.firstname }}</td>
                         <td>{{ customer.lastname }}</td>
+                        <td>{{ customer.society }}</td>
                         <td>{{ customer.mail }}</td>
                         <td>{{ customer.dateAdd|date('d-m-Y H:i') }}</td>
                     </tr>

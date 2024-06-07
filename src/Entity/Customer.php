@@ -6,6 +6,8 @@ use App\Repository\CustomerRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+
+//changement du nom society_name en society
 #[ORM\Entity(repositoryClass: CustomerRepository::class)]
 class Customer
 {
@@ -24,7 +26,7 @@ class Customer
     private ?string $mail = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $society_name = null;
+    private ?string $society = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private \DateTime $date_add;
@@ -70,14 +72,14 @@ class Customer
         return $this;
     }
 
-    public function getSocietyName(): ?string
+    public function getSociety(): ?string
     {
-        return $this->society_name;
+        return $this->society;
     }
 
-    public function setSocietyName(string $society_name): static
+    public function setSociety(string $society): static
     {
-        $this->society_name = $society_name;
+        $this->society = $society;
 
         return $this;
     }

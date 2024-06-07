@@ -27,4 +27,42 @@ class HomeController extends AbstractController
     {
         return new JsonResponse('Hello ' . $name . ' !');
     }
+
+
+
+    //route de modification d'un produit
+    #[Route('/api/product/update', name: 'api_product_update', methods: ['PUT'])]
+    public function updateProduct(Request $request): JsonResponse
+    {
+        $data = json_decode($request->getContent(), true);
+
+        $productId = $data['id'];
+        $productName = $data['name'];
+        $productDescription = $data['description'];
+        $productPrice = $data['price'];
+
+        $product = $this->getDoctrine()->getRepository(Product::class)->find($productId);
+        $product->setName($productName);
+        $product->setDescription($productDescription);
+        $product->setPrice($productPrice);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($product);
+        $entityManager->flush();
+
+        return new JsonResponse(['message' => 'Produit mis à jour']);
+    }
+
+
+    // route de suppression d'un produit 
+    #[Route('/api/product/delete/{id}', name: 'api_product_delete', methods: ['DELETE'])]
+    public function deleteProduct(int $id): Response
+    {
+        $product = $this->getDoctrine()->getRepository(Product::class)->find($id);
+        $product->deleteProduct();
+
+
+        return new JsonResponse(['message' => 'Product deleted successfully']);
+    }
+
+    
 }
